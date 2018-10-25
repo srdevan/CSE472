@@ -1,5 +1,6 @@
 import base64
 import constants
+import glob
 import json
 import MySQLdb
 import requests
@@ -101,4 +102,19 @@ def get_comments(video_id, comment_count):
 
 	return comments
 
-prepare_dataset(["NHVnyfYqXnQ"])
+def get_video_ids(data):
+	video_hashes = []
+	video_urls = [data.keys()]
+	for video_url in video_urls:
+		video_hashes.append(video_url.split("/")[-1])
+
+	return video_hashes
+
+video_ids = []
+files = glob.glob(constants.TWEETTUBE_DIR_PATH_REGEX)
+for file in files:
+	with open(file) as fd:
+		data = json.load(fd)
+		video_ids += get_video_ids(data)
+
+prepare_dataset(video_ids)
