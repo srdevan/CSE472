@@ -1,22 +1,21 @@
 import base64
 import constants
 import json
-import requests
 import MySQLdb
-
-
+import requests
 
 api_key = base64.b64decode(open("API_KEY.txt", "r").read()).decode("utf-8")
 
 def prepare_dataset(video_ids):
 	db = MySQLdb.connect(host="localhost",  # your host 
-					 user="root",       # username
-					 db="bot_identification_warehouse")   # name of the database
+						user="root",       # username
+						db="bot_identification_warehouse")   # name of the database
 
 	# Create a Cursor object to execute queries.
 	cur = db.cursor()
 	stat_file = open("video_statistics.csv", "w")
-	stat_file.write("video_id, channel_id, subscriberCount, viewCount, likeCount, dislikeCount, commentCount, comments\n")
+	stat_file.write("video_id, channel_id, subscriberCount, viewCount, likeCount, dislikeCount, commentCount,\
+					comments\n")
 	video_stat_url = constants.YOUTUBE_PREFIX_VIDEO_URL + api_key + "&id=" + ",".join(video_ids)
 	response = get_video_stats(video_stat_url)
 
@@ -28,7 +27,8 @@ def prepare_dataset(video_ids):
 
 		if channel_response.status_code == 200:
 			channel_stats = parse_response(channel_response.text)
-			channel_id_subscriber_count = { item["id"]: item["statistics"]["subscriberCount"] for item in channel_stats["items"] }
+			channel_id_subscriber_count = { item["id"]: item["statistics"]["subscriberCount"] for item in \
+											channel_stats["items"] }
 
 			for item in video_stats["items"]:
 				item_stats = item["statistics"]
@@ -39,8 +39,10 @@ def prepare_dataset(video_ids):
 				if "commentCount" in item_stats.keys():
 					comment_count = item_stats["commentCount"]
 					comments = get_comments(item["id"], int(comment_count))
-				sql ="insert into videos (video_id,channel_id,view_count,like_count,dislike_count,subscriber_count,comment_count,comments) values (%s,%s,%s,%s,%s,%s,%s,%s)"
-				val = (item["id"],channel_id,item_stats["viewCount"],item_stats["likeCount"],item_stats["dislikeCount"],subscriber_count,comment_count,comments)
+				sql = "insert into videos (video_id,channel_id,view_count,like_count,dislike_count,subscriber_count,\
+				                          comment_count,comments) values (%s,%s,%s,%s,%s,%s,%s,%s)"
+				val = (item["id"],channel_id,item_stats["viewCount"],item_stats["likeCount"],\
+						item_stats["dislikeCount"],subscriber_count,comment_count,comments)
 				cur.execute(sql, val)
 				db.commit()
 
@@ -71,7 +73,6 @@ def get_video_stats(url):
 }
 '''
 def parse_response(response):
-
 	return json.loads(response)	
 
 def parse_comments(response):
