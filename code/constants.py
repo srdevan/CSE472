@@ -1,4 +1,7 @@
-
+COMMENT_DIR_PATH = "../dataset/comments/"
+DUMPED_OBJECTS_DIR_PATH = "../dataset/dumped_objects/"
+TESTING_DATA_DIR_PATH = "../dataset/test/"
+TRAINING_DATA_DIR_PATH = "../dataset/train/"
 TWEETTUBE_DIR_PATH_REGEX = "../dataset/tweettube_dataset/*"
 YOUTUBE_PREFIX_VIDEO_URL = "https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&key="
 YOUTUBE_PREFIX_CHANNEL_URL = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&key="
