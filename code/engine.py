@@ -1,9 +1,11 @@
 import constants
+from feature_functions import *
 import json
 from MaxEnt import MyMaxEnt
 import MySQLdb
 import pickle
 import random
+import sys
 
 """
 1. get all video ids and shuffle the array
@@ -67,7 +69,8 @@ def train_my_model(video_ids, comment_bot_tags):
 	testing_comment_bot_tags = comment_bot_tags[training_data_index:]
 	testing_dataset = prepare_dataset(testing_videos, False)
 
-	max_ent = MyMaxEnt(training_dataset, training_comment_bot_tags, feature_func)
+	feature_functions = [f1, f2, f3, f4, f5, f6, f7]
+	max_ent = MyMaxEnt(training_dataset, training_comment_bot_tags, feature_functions)
 	max_ent.train()
 
 	return max_ent, testing_dataset, testing_comment_bot_tags
