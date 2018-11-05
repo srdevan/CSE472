@@ -1,6 +1,7 @@
 COMMENT_DIR_PATH = "../dataset/comments/"
 DUMPED_OBJECTS_DIR_PATH = "../dataset/dumped_objects/"
 PROCESSED_COMMENT_DIR_PATH = "../dataset/comments/processed/"
+STATISTICAL_ANALYZER_DIR_PATH = "../dataset/statistical_analyzer/"
 TESTING_DATA_DIR_PATH = "../dataset/test/"
 TRAINING_DATA_DIR_PATH = "../dataset/train/"
 TWEETTUBE_DIR_PATH_REGEX = "../dataset/tweettube_dataset/*"
