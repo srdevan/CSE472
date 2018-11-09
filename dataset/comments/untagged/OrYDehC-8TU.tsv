@@ -1,0 +1,21 @@
+John Bostick	QUESTION:  If you have little tech skill, i.e. don't use command prompt to solve issues, how do you set up a Bitcoin Node?  I have the hardware (a computer with plenty of disk space) and downloaded the Bitcoin block chain but could not get the node to work, I think the problem was getting my home machine to be a static ip.  At least I think that was the issue.  I am pretty sure it had to do with my internet connection not talking back to the block chain.  I spent a lot of time on the Bitcoin Core website looking at posts and I am pretty sure it is the internet ip that is the problem.  I could not find any solution simple enough for my tech neophyte brain to handle. I know that nodes are critical to the infrastructure of Bitcoin and other crypto and if you want to be more than a sideline investor and you are a true believer, which I am, you want to help and be a part of the infrastructure.  The problem is it seems there is no "black box" solution I can buy on Amazon that will set up a node and solve any connection issues.  I am surprised this has not been built.  If it has please tell us about it.  If not please help.   :)
+Thomas Grainger	Don't they pull out the voting rules and hard code the softfork results?
+Peeticek Peet	Strange.. i always thought that the speed limit for the initial download is the upload capabilities of 8 public nodes that provide the whole data package to mine node..
+Aaron Walter	Invest in FGC Fantasy Gold A real use case in fantasy and esports.
+Coin Cabin	Forget Bitcoin, get some FGC (Fantasy Gold), real use and way better project!
+BEND JOZZ	good and useful videos don't miss
+Absilon	Crypto markets should trade against stablecoins not btc/eth. It makes a lot more sense. By the way, my favorite crypto is FGC. It's one of a very few cryptos with a real world use.
+Nachannachle	Wow, thank you for the explanation.  Blockchain technology in Bitcoin is REALLY amazing.
+TeslaKaniv	The bandwidth your peers are sending blocks can be a bottleneck too. Another nitpick - it is the latency (in msec) of a hard drive or SSD that matter, not bandwidth (in MB/sec) as such.
+Присяжный Засидатель	@sequentialvsion
+nion456789	Smashed the like
+Michael Jack	Wow
+Nixon Rexzile	Wow now i know! I thought I knew everything but Andrea keep feeding me info on Bitcoin :)
+Joe Miller	How does a node know to emulate soft forks in the protocol for specific blocks? Is that hard coded into the node implementation? Isn't the definition of a soft fork that it is backwards compatible so why does this have to happen? I assume that the blocks are not marked with a software version because there is no one version of bitcoin software as it is a protocol.
+Buysome Bitcoin	Can it be used for time travel? Sounds cool!
+dajosova	so... why being a node matters ?
+Chancellor Crypto	That's where some forks have their own enhancements. Bitcore has a blockchain size ~950 mb, and a blocksize 10MB/20MB SegWit
+Cory Kanski	Are bootstrapped appliance-like machines safe? Isn't that route skipping a lot of what was just mentioned? I'm surprised there's a market for them
+Lachlan Greenbank	Lookup how to write a config file for your node. you can crank up the ram to 8gb+ if you have it available. I wish I knew that the first time. Really speeds it up.
+FukU2222	I got into ETH back in early 2017 and had no problem DL'ing/syncing blockchain - I then foolishly thought I had to have my chain sync'd to make a transaction and thought I was SoL (pressed for time) because it wouldn't DL/Sync up.  Make sure you have a decent hard drive, don't want that shit bricking on you//unable to keep up with rest of chain. Solid state(s) is/are a great choice, much cheaper now days too than when I first built this PoS, lmao.... Cheers Andreas.
+R	always a pleasure learning from you @aantonop! thanks
