@@ -61,7 +61,7 @@ class MyMaxEnt():
 			tags = ['None']
 		for tag in tags:
 			vector = []    
-			for func in feature_func:
+			for func in self.feature_func:
 				vector.append(func(hl,tag))
 			numerator = math.exp(numpy.dot(vector,model))
 			denominator = 0
