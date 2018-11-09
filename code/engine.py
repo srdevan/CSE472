@@ -24,7 +24,7 @@ def fetch_results(query):
 	return results
 
 def get_videos_ids_and_comment_tags():
-	query = "select (video_id, comment_bot_gt) from videos;"
+	query = "select video_id, comment_bot_tag from videos where comment_bot_tag is not null;"
 	rows = fetch_results(query)
 	video_comment_bot_tag_map = {}
 	for row in rows:
@@ -43,18 +43,12 @@ def randomize_dataset(video_comment_bot_tag_map):
 
 def prepare_dataset(training_videos, train = True):
 	dir_path = constants.TRAINING_DATA_DIR_PATH if train else constants.TESTING_DATA_DIR_PATH
-	dataset = open(dir_path + "training_video_data.csv", "w")
 	data = []
 	for video_id in training_videos:
-		video_file = open(constants.COMMENT_DIR_PATH + video_id + ".json", "r")
-		comments = json.loads(video_file.readlines())
-
-		for comment in comments:
-			user = comment[0]
-			reply = comment[1]
-			row = user + "," + reply + "\n"
-			dataset.write(row)
-			data.append(row)
+		video_file = open(constants.PROCESSED_COMMENT_DIR_PATH + video_id + ".tsv", "r")
+		comment_data = video_file.readlines()
+		data.append(comment_data)
+		video_file.close()
 
 	return data
 
@@ -69,7 +63,7 @@ def train_my_model(video_ids, comment_bot_tags):
 	testing_comment_bot_tags = comment_bot_tags[training_data_index:]
 	testing_dataset = prepare_dataset(testing_videos, False)
 
-	feature_functions = [f1, f2, f3, f4, f5, f6, f7]
+	feature_functions = [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22, f23, f24, f25, f26, f27, f28, f29, f30, f31]
 	max_ent = MyMaxEnt(training_dataset, training_comment_bot_tags, feature_functions)
 	max_ent.train()
 
@@ -80,6 +74,7 @@ def test_my_model(max_ent, testing_dataset):
 	for row in testing_dataset:
 		classified_as.append(max_ent.classify(row))
 
+	print(classified_as)
 	return classified_as
 
 def evaluate_my_model(output_tags, ground_truth_tags):
@@ -87,17 +82,17 @@ def evaluate_my_model(output_tags, ground_truth_tags):
 
 if sys.argv[1] == "train":
 	try:
-		video_comment_bot_tags = get_videos_ids_and_comment_tags()
+		video_comment_bot_tag_map = get_videos_ids_and_comment_tags()
 		video_ids, comment_bot_tags = randomize_dataset(video_comment_bot_tag_map)
 		max_ent, testing_dataset, testing_comment_bot_tags = train_my_model(video_ids, comment_bot_tags)
-		pickle.dump({ "model": max_ent.model, "test_data": testing_dataset, "test_comment_tags": \
+		pickle.dump({ "max_ent": max_ent, "model": max_ent.model, "test_data": testing_dataset, "test_comment_tags": \
 						testing_comment_bot_tags}, open(constants.DUMPED_OBJECTS_DIR_PATH + "model.p","wb"))
 	except:
 		print("---")
 else:
 	try:
-		objects = pickle.load(constants.DUMPED_OBJECTS_DIR_PATH + "model.p", "rb")
-		test_my_model(objects["model"], objects["test_data"])
+		objects = pickle.load(open(constants.DUMPED_OBJECTS_DIR_PATH + "model.p", "rb"))
+		test_my_model(objects["max_ent"], objects["test_data"])
 		evaluate_my_model(classified_as, objects["test_comment_tags"])
 	except:
 		print("---")

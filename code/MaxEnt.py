@@ -11,10 +11,10 @@ class MyMaxEnt():
 	def __init__(self, history_list, old_tag_list, funcs):
 		self.history_list = history_list
 		self.training_data = []
-		self.model = [0]*10
-			self.old_tag_list = old_tag_list
-			self.feature_func = funcs
-			self.tag_list = ["Bot inflated", "Organic"]
+		self.model = [1/31]*31
+		self.old_tag_list = old_tag_list
+		self.feature_func = funcs
+		self.tag_list = ["bot_inflated", "organic"]
 		self.create_dataset()
 		
 	def create_dataset(self):
@@ -71,7 +71,7 @@ class MyMaxEnt():
 
 		return prob
 		
-	def classify(self,comment):
+	def classify(self, comment):
 		cfier = []
 		denominator = 0
 
@@ -79,20 +79,19 @@ class MyMaxEnt():
 			try:
 				denominator += math.exp(numpy.dot(self.find_vector(comment,tag),self.model))
 			except:
-				return []
+				return "None"
 
 		for tag in self.tag_list:
 			num = math.exp(numpy.dot(self.find_vector(comment,tag),self.model))
 			p = num/denominator
 			cfier.append(p)
 
+		print(cfier)
 		for iter in range(len(cfier)):
 			if cfier[iter] > 1/2.0:
-				cfier[iter] = 1
+				return "bot_inflated"
 			else:
-				cfier[iter] = 0
-
-		return cfier
+				return "organic"
 
 	def train(self):
 		obj = minimize(self.cost, self.model, method = "L-BFGS-B", jac=False)
