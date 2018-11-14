@@ -1,4 +1,4 @@
-COMMENT_DIR_PATH = "../dataset/comments/"
+COMMENT_DIR_PATH = "../dataset/comments/*"
 DUMPED_OBJECTS_DIR_PATH = "../dataset/dumped_objects/"
 PROCESSED_COMMENT_DIR_PATH = "../dataset/comments/processed/"
 STATISTICAL_ANALYZER_DIR_PATH = "../dataset/statistical_analyzer/"

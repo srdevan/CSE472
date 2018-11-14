@@ -11,7 +11,7 @@ class MyMaxEnt():
 	def __init__(self, history_list, old_tag_list, funcs):
 		self.history_list = history_list
 		self.training_data = []
-		self.model = [1/31]*31
+		self.model = [1/15]*15
 		self.old_tag_list = old_tag_list
 		self.feature_func = funcs
 		self.tag_list = ["bot_inflated", "organic"]
@@ -50,6 +50,7 @@ class MyMaxEnt():
 		for iter in range(len(self.training_data)):
 			try:
 				score += math.log(self.p_y_given_x(self.history_list[iter], self.training_data[iter], self.old_tag_list[iter], model))
+				print(score)
 			except:
 				continue
 

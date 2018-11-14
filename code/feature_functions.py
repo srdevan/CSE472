@@ -111,7 +111,7 @@ def f10(sentence, tag):
 def f11(sentence, tag):
 	for comment in sentence:
 		if(tag == "bot_inflated"):
-			patterns = ['facebook', 'instagram']
+			patterns = ['facebook', 'instagram', 'gofundme']
 			j = comment.split("\t")
 			for i in range(len(patterns)):
 				if(re.findall(patterns[i], j[1].lower())):
@@ -152,6 +152,16 @@ def f15(sentence, tag):
 	for comment in sentence:
 		if(tag == "bot_inflated"):
 			patterns = ['invite']
+			j = comment.split("\t")
+			for i in range(len(patterns)):
+				if(re.findall(patterns[i], j[1].lower())):
+					return 1
+	return 0
+
+def f16(sentence, tag):
+	for comment in sentence:
+		if(tag == "bot_inflated"):
+			patterns = ['http', 'https']
 			j = comment.split("\t")
 			for i in range(len(patterns)):
 				if(re.findall(patterns[i], j[1].lower())):
