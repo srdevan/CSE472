@@ -81,19 +81,40 @@ def get_video_stats(url):
  ]
 }
 '''
+def prepare_comment_dataset():
+	db = MySQLdb.connect(host="localhost",  # your host 
+						user="root",       # username
+						db="bot_identification_warehouse")   # name of the database
+
+	# Create a Cursor object to execute queries.
+	cur = db.cursor()
+	query = "select video_id, comment_count from videos where video_id = 'Mpb0E9qWGjo';"
+	cur.execute(query)
+	results = cur.fetchall()
+	for result in results:
+		video_id = result[0]
+		comment_count = result[1]
+		file = open(constants.COMMENT_DIR_PATH + video_id + ".tsv", "w")
+		comments = get_comments(video_id, comment_count)
+		for comment_author, comment in comments.items():
+			file.write(comment_author + "\t" + str(comment) + "\n")
+		print("File " + video_id + "written")
+		# exit()
+
 def parse_response(response):
 	return json.loads(response)	
 
 def parse_comments(response):
 	comments = { }
 	for item in response["items"]:
-		comment_author_name = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
-		comments[comment_author_name] = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
+		comment_author_name = (item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]).replace("\t", " ").replace("\n", " ")
+		comments[comment_author_name] = (item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]).replace("\t", " ").replace("\n", " ")
 
-	return str(comments)
+	return comments
+
 
 def get_comments(video_id, comment_count):
-	comments = ""
+	comments = {}
 	default = 100
 	next_page_token = ""
 	while(comment_count > 0):
@@ -112,7 +133,7 @@ def get_comments(video_id, comment_count):
 				# pdb.set_trace()
 				next_page_token = parsed_response["nextPageToken"]
 
-			comments += parse_comments(parsed_response)
+			comments.update(parse_comments(parsed_response))
 			comment_count -= 100
 
 	return comments
@@ -126,14 +147,15 @@ def get_video_ids(data):
 
 	return video_hashes
 
+prepare_comment_dataset()
 # files = glob.glob(constants.TWEETTUBE_DIR_PATH_REGEX)
-files = ["../dataset/tweettube_dataset/3.json"]
-for file in files:
-	with open(file) as fd:
-		data = json.load(fd)
-		video_ids = get_video_ids(data)
-		for video_id in video_ids[:]:
-			try:
-				prepare_dataset(video_id) 
-			except:
-				print("Exception")
+# files = ["../dataset/tweettube_dataset/3.json"]
+# for file in files:
+# 	with open(file) as fd:
+# 		data = json.load(fd)
+# 		video_ids = get_video_ids(data)
+# 		for video_id in video_ids[:]:
+# 			try:
+# 				prepare_dataset(video_id) 
+# 			except:
+# 				print("Exception")
