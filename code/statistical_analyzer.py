@@ -37,7 +37,7 @@ def ratio_view_count_comment_count(actual_videos, data_rvccc):
 
 def log_view_count_vs_like_dislike_count(actual_videos, data_lvc, data_lldc):
 	"""
-	TODO: 1) find slope for the trendline
+	1) find slope for the trendline
 	2) then find perpendicular distance to the trendline for all the videos
 	3) return videos having distance more than threshold value
 	"""
@@ -61,12 +61,6 @@ def log_view_count_vs_like_dislike_count(actual_videos, data_lvc, data_lldc):
 
 	return bot_videos
 
-def evaluate_my_model():
-	"""
-	TODO: model accuracy based on ground truth
-	"""
-	pass
-
 data = pd.read_csv(constants.STATISTICAL_ANALYZER_DIR_PATH + "view_bot.csv")
 data_rvcldc = data["ratio_view_count_like_dislike_count"]
 data_rvccc = data["ratio_view_count_comment_count"]
@@ -79,6 +73,5 @@ classified_bot_videos_rvcldc = ratio_view_count_like_dislike_count(actual_videos
 classified_bot_videos_lvcvldc = log_view_count_vs_like_dislike_count(actual_videos, data_lvc, data_lldc)
 final_bot_identified_videos = set(classified_bot_videos_lvcvldc + classified_bot_videos_rvcldc + \
 								classified_bot_videos_rvccc)
+print("The ViewBot inflated videos are: ")
 print(final_bot_identified_videos)
-
-# evaluate_my_model()

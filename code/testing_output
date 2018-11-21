@@ -1,0 +1,29 @@
+Initial train output:
+
+TP:
+39
+FP:
+18
+FN:
+0
+Precision is:
+0.6842105263157895
+Recall is:
+1.0
+F1 score is:
+0.8125000000000001
+
+second train output:
+
+TP:
+38
+FP:
+18
+FN:
+1
+Precision is:
+0.6785714285714286
+Recall is:
+0.9743589743589743
+F1 score is:
+0.8

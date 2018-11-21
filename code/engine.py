@@ -13,8 +13,6 @@ import sys
 3. once model is built, we can pass the remaining dataset as testset and evaluate accuracy of model.
 """
 
-#TODO: handle exceptions and perform unit tests
-
 def fetch_results(query):
 	db = MySQLdb.connect(host = "localhost", user = "root", db = "bot_identification_warehouse")
 	cur = db.cursor()
