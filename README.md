@@ -1,4 +1,4 @@
-Detecting bot-inflated videos on Youtube
+*Detecting bot-inflated videos on Youtube*
 
 Youtube has emerged as one of the social media platforms for creators to publish content and monetize it through their increasing audience and viewership. In the race of coming in limelight, few creators try to improve the statistics of published content like number of views, subscribers, likes, etc. through automated scripts or bots. This is a concern for two reasons - a) inflated views lead to disparity among the genuine creators, gaining popularity via organic traffic and others resorting to bot inflation for fame, thus abusing the remuneration mechanism b) ad impressions which work only in case of user interactions like clicks, get wasted due to the activity of view bots, taking a toll on the youtube advertisers. Hence, it is important to solutionize the problem by analyzing the social media interactions and penalize the fake popularity seekers for violating the terms of service. This would also help businesses to get finer insights from their consumer base and not get misled by popularity of certain content.  
 
@@ -6,20 +6,30 @@ The project can be run on any OS environment having python 3.5.+ installed.
 Following libraries need to be installed before hand:
 
 requests==2.18.4
+
 ujson==1.35
+
 ijson==2.3
+
 jsonschema==2.6.0
+
 glob2==0.6
+
 cloudpickle==0.5.3
+
 pickleshare==0.7.4
+
 numpy==1.15.4
+
 scipy==1.1.0
+
 nltk==3.3
+
 pandas==0.23.0
 
 Following is the directory structure:
 
-dataset: Consists of the following directories
+- dataset: Consists of the following directories
 
 		- comments 
 			- processed : contains processsed comments scraped in the form of tab separated files (.tsv files)
@@ -38,7 +48,7 @@ dataset: Consists of the following directories
 
 		- dump.sql : contains database screenshot containing videos and related statistics
 
-code: Consists of the following files 
+- code: Consists of the following files 
 		
         - API_KEY.txt : contains base64 encoded YouTube API key
 		
@@ -59,9 +69,9 @@ code: Consists of the following files
         - statistical_analyzer.py : contains logic for identifying view bot inflation based on correlation between view count and metrics like sum of 								likes and dislikes
 
 
-HOW TO RUN AND TEST THE MODEL:
+How to run and test the model:
 
-	Use the following steps on the pre-processed data
+	(Use the following steps on the pre-processed data)
 
 	1. Data Scraping : python data_scraper.py
 
